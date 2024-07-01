@@ -9,11 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //setWindowTitle("孤独摇滚");
+    setWindowTitle("孤独摇滚");
     //设置应用到托盘
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon("://gudu/shan.png"));//之前一直不行是因为路径错误了
-
+    setWindowIcon(QIcon("://gudu/shan.png"));
     //trayIcon->setIcon(QIcon("://gudu/1.png"));
     //创建托盘菜单
     traymenu = new QMenu(this);
@@ -34,39 +34,40 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setWindowFlags(this->windowFlags()|Qt::WindowStaysOnTopHint);
 
-    setWindowFlag(Qt::FramelessWindowHint);
-    setWindowFlags(windowFlags()|Qt::WindowStaysOnTopHint);
-    setAttribute(Qt::WA_TranslucentBackground);
-    // this->setFixedSize(this->m_Yamada_Ryo->width(),this->m_Yamada_Ryo->height());
+    setWindowFlag(Qt::FramelessWindowHint);//窗口无边框
+    setWindowFlags(windowFlags()|Qt::WindowStaysOnTopHint);//窗口置顶
+    setAttribute(Qt::WA_TranslucentBackground);//窗口保持透明
+    this->setFixedSize(200,200);//设定窗口大小为200*200
 
     connect(this->m_Yamada_Ryo,&Yamada_Ryo::changePix,[=](){
-        update();
+        update();//渲染主窗口图片
     });
 
     trayIcon->show();
 }
 void MainWindow::closeTrayIcon(QAction *quitaction){
     connect(quitaction,&QAction::triggered,this,&MainWindow::close);
-}
+}//这没用
 
 void MainWindow::closeEvent(QCloseEvent *event){
     if(trayIcon->isVisible()){
         trayIcon->hide();
         trayIcon->deleteLater();
-    }
+
+    }//这里进程退出的时候，线程退出的顺序有问题，表现为关闭窗口,但是exe还存在
 
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-
+    diff_ = event->globalPos()-this->pos();
 }
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
-
+    diff_ = QPoint();
 }
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
-
+    this->move(event->globalPos()-this->diff_);
 }
 
 void MainWindow::paintEvent(QPaintEvent *){

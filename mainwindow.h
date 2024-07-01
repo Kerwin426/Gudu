@@ -26,6 +26,7 @@ private:
     QSystemTrayIcon *trayIcon;
     QMenu *traymenu;
     QAction *quitAction;
+    QPoint diff_;
 private:
     void closeTrayIcon(QAction * quitaction);
     void closeEvent(QCloseEvent* event);//重写关闭窗口事件，使得窗口关闭后，隐藏并删除托盘图标

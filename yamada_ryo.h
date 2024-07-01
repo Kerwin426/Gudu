@@ -2,7 +2,7 @@
 #define YAMADA_RYO_H
 #include<QWidget>
 #include<QTimer>
-
+#include<QMouseEvent>
 class Yamada_Ryo :public QWidget
 {
     Q_OBJECT
