@@ -3,7 +3,7 @@
 #include "QSystemTrayIcon"
 #include <QMainWindow>
 #include "yamada_ryo.h"
-
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,7 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);//
     ~MainWindow();
     Yamada_Ryo *m_Yamada_Ryo;
-
+    void paintEvent(QPaintEvent*);
 
 private:
     Ui::MainWindow *ui;
@@ -32,5 +32,6 @@ private:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
+
 };
 #endif // MAINWINDOW_H
