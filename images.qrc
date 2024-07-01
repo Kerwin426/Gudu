@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>gudu/shan.png</file>
+        <file>gudu/shan.ico</file>
+        <file>gudu/1.png</file>
+        <file>gudu/2.png</file>
+        <file>gudu/3.png</file>
+        <file>gudu/4.png</file>
+        <file>gudu/5.png</file>
+        <file>gudu/6.png</file>
+        <file>gudu/7.png</file>
+    </qresource>
+</RCC>
